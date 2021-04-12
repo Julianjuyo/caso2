@@ -7,25 +7,25 @@ public class MemoriaVirtual {
     // ATRIBUTOS
 
     //Este atributo indica si el Thread que se encarga de leer las páginas que se deben llamar, ya leyó todas las páginas.
-    private static boolean termineDeLeer;
+    private boolean termineDeLeer;
 
-    private static int numeroPaginasProceso;
+    private final int numeroPaginasProceso;
 
-    private static int numeroMarcosDePagina;
+    private final int numeroMarcosDePagina;
 
-    private static int nivelDeLocalidad;
+    private final int nivelDeLocalidad;
 
-    private static Integer[] paginasPorLeer;
+    private final Integer[] paginasPorLeer;
 
     private int cantFallosDePagina;
 
-    private static long[] contadoresDeLlamadosACadaPagina;
+    private final long[] contadoresDeLlamadosACadaPagina;
 
-    private static Boolean[] buffer;
+    private final Boolean[] buffer;
 
-    private static Integer[] tablaDePaginas;
+    private final Integer[] tablaDePaginas;
 
-    private static int ocupacionTablaDePaginas;
+    private int ocupacionTablaDePaginas;
 
     // CONSTRUCTOR
 
@@ -54,8 +54,7 @@ public class MemoriaVirtual {
     public void actualizarOcupacionTablaDePaginas(){
         this.ocupacionTablaDePaginas++;
     }
-
-
+    
     public int darOcupacionTablaDePaginas(){
         return this.ocupacionTablaDePaginas;
     }
@@ -88,9 +87,9 @@ public class MemoriaVirtual {
         this.cantFallosDePagina++;
     }
 
-    public synchronized boolean revisarSiLaPaginaEstaEnLaTablaDePaginas(int paginaPorRevisar) {
-        for (int i = 0; i < this.tablaDePaginas.length; i++) {
-            if (this.tablaDePaginas[i] != null && this.tablaDePaginas[i] == paginaPorRevisar) {
+    public boolean revisarSiLaPaginaEstaEnLaTablaDePaginas(int paginaPorRevisar) {
+        for (Integer tablaDePagina : this.tablaDePaginas) {
+            if (tablaDePagina != null && tablaDePagina == paginaPorRevisar) {
                 return true;
             }
         }
@@ -98,7 +97,7 @@ public class MemoriaVirtual {
     }
 
 
-    public synchronized boolean revisarSiHayEspacioEnLaTablaDePaginas() {
+    public boolean revisarSiHayEspacioEnLaTablaDePaginas() {
         return this.ocupacionTablaDePaginas < this.numeroMarcosDePagina;
     }
 
@@ -125,7 +124,7 @@ public class MemoriaVirtual {
     }
 
     //¿Deberíamos reiniciar el contador de la página que sale?
-    public synchronized void reemplazarPaginaEnTablaDePaginas(int paginaNueva, int paginaVieja){
+    public void reemplazarPaginaEnTablaDePaginas(int paginaNueva, int paginaVieja){
         for(int i = 0; i < this.tablaDePaginas.length; i++){
             if(this.tablaDePaginas[i] == paginaVieja){
                 this.tablaDePaginas[i] = paginaNueva;
@@ -134,7 +133,7 @@ public class MemoriaVirtual {
         }
     }
 
-    public synchronized void agregarPaginaEnTablaDePaginas(int paginaNueva){
+    public void agregarPaginaEnTablaDePaginas(int paginaNueva){
         this.tablaDePaginas[ocupacionTablaDePaginas]= paginaNueva;
     }
 
