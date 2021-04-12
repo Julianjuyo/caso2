@@ -160,7 +160,7 @@ public class MemoriaVirtual {
                 paginaLlamada = i;
             }
         }
-        actualizarBuffer(paginaLlamada);
+        actualizarContadores(paginaLlamada);
         limpiarBuffer();
     }
 }
