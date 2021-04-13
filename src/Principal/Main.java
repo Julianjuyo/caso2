@@ -22,10 +22,13 @@ import java.io.IOException;
 
 public class Main {
 
+    // ATRIBUTOS
     static String ruta= "";
 
+    // METODO MAIN
     public static void main(String[] args) {
 
+        //CREACIÓN DE PANEL PARA CARGAR ARCHIVO
 
         JFrame.setDefaultLookAndFeelDecorated(true);
         JDialog.setDefaultLookAndFeelDecorated(true);
@@ -54,6 +57,7 @@ public class Main {
                     try {
 
 
+                        // Lectura del documento
                         String cadena;
                         FileReader f = new FileReader(ruta);
                         BufferedReader b = new BufferedReader(f);
@@ -75,6 +79,8 @@ public class Main {
                         System.out.println("numeroMarcosDePagina: "+numeroMarcosDePagina);
                         System.out.println("numeroPaginasProceso: "+numeroPaginasProceso);
                         System.out.println("nivelDeLocalidad: "+nivelDeLocalidad);
+
+                        // Inicialización del programa
 
                         Integer[] paginasPorLeerArray= new Integer[paginasPorLeer.size()];
                         paginasPorLeerArray = paginasPorLeer.toArray(paginasPorLeerArray);

@@ -16,7 +16,7 @@ public class TActualizarReferencias extends Thread {
 
 
     /**
-     *
+     * Run del thread
      */
     public void run(){
 
